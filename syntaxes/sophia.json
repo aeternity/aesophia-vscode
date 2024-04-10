@@ -1,0 +1,454 @@
+{
+    "fileTypes": [
+        "aes"
+    ],
+    "name": "Sophia",
+    "patterns": [
+        {
+            "include": "#comment"
+        },
+        {
+            "include": "#operator"
+        },
+        {
+            "include": "#control"
+        },
+        {
+            "include": "#constant"
+        },
+        {
+            "include": "#number"
+        },
+        {
+            "include": "#string"
+        },
+        {
+            "include": "#type"
+        },
+        {
+            "include": "#global"
+        },
+        {
+            "include": "#declaration"
+        },
+        {
+            "include": "#function-call"
+        },
+        {
+            "include": "#qualification"
+        },
+        {
+            "include": "#punctuation"
+        }
+    ],
+    "repository": {
+        "comment": {
+            "patterns": [
+                {
+                    "include": "#comment-line"
+                },
+                {
+                    "include": "#comment-block"
+                }
+            ]
+        },
+        "comment-line": {
+            "match": "(?<!tp:)//.*?$",
+            "name": "comment.line.sophia"
+        },
+        "comment-block": {
+            "begin": "/\\*",
+            "end": "\\*/",
+            "name": "comment.block.sophia"
+        },
+        "operator": {
+            "patterns": [
+                {
+                    "include": "#operator-comparison"
+                },
+                {
+                    "include": "#operator-logical"
+                },
+                {
+                    "include": "#operator-list"
+                },
+                {
+                    "include": "#operator-functional"
+                },
+                {
+                    "include": "#operator-arrow-associative"
+                },
+                {
+                    "include": "#operator-arithmetic"
+                },
+                {
+                    "include": "#operator-assignment"
+                }
+            ]
+        },
+        "operator-comparison": {
+            "match": "(==|=<|>=|<|>|!=)",
+            "name": "keyword.operator.comparison.sophia"
+        },
+        "operator-logical": {
+            "match": "(!|&&|\\|\\|)",
+            "name": "keyword.operator.logical.sophia"
+        },
+        "operator-list": {
+            "match": "(::|\\+\\+)",
+            "name": "keyword.operator.list.sophia"
+        },
+        "operator-functional": {
+            "match": "(\\|>)",
+            "name": "keyword.operator.functional.sophia"
+        },
+        "operator-arrow-associative": {
+            "match": "(=>)",
+            "name": "keyword.operator.arrow.associative.sophia"
+        },
+        "operator-arithmetic": {
+            "match": "(\\+|-|/|\\*|\\^|mod)",
+            "name": "keyword.operator.arithmetic.sophia"
+        },
+        "operator-assignment": {
+            "match": "(=)",
+            "name": "keyword.operator.assignment.sophia"
+        },
+        "control": {
+            "patterns": [
+                {
+                    "include": "#control-flow"
+                },
+                {
+                    "include": "#control-pragma"
+                },
+                {
+                    "include": "#control-include"
+                },
+                {
+                    "include": "#control-alias"
+                },
+                {
+                    "include": "#control-let"
+                }
+            ]
+        },
+        "control-flow": {
+            "match": "\\b(if|else|elif|switch)\\b",
+            "name": "keyword.control.flow.sophia"
+        },
+        "control-pragma": {
+            "match": "^(@compiler)",
+            "name": "keyword.control.pragma.sophia"
+        },
+        "control-include": {
+            "match": "^(include)",
+            "name": "keyword.control.include.sophia"
+        },
+        "control-alias": {
+            "patterns": [
+                {
+                    "match": "(using)(\\s+[A-Z][A-Za-z0-9_']*)?((\\s+as)?(\\s+[A-Z][A-Za-z0-9_']*)?)(\\s+(for|hiding))?",
+                    "captures": {
+                        "1": {
+                            "name": "keyword.control.aliasing.using.sophia"
+                        },
+                        "2": {
+                            "name": "entity.name.namespace.sophia"
+                        },
+                        "4": {
+                            "name": "keyword.control.aliasing.as.sophia"
+                        },
+                        "5": {
+                            "name": "entity.name.namespace.alias.sophia"
+                        },
+                        "7": {
+                            "name": "keyword.control.aliasing.inclusion.sophia"
+                        }
+                    }
+                }
+            ]
+        },
+        "control-let": {
+            "match": "\\b(let)(\\s+[a-z_][A-Za-z0-9_']*)\\b",
+            "captures": {
+                "1": {
+                    "name": "keyword.control.let.sophia"
+                },
+                "2": {
+                    "name": "variable.other.local.sophia"
+                }
+            }
+        },
+        "constant": {
+            "patterns": [
+                {
+                    "include": "#constant-boolean"
+                },
+                {
+                    "include": "#constant-bytes"
+                },
+                {
+                    "include": "#constant-number"
+                },
+                {
+                    "include": "#constant-address"
+                }
+            ]
+        },
+        "constant-boolean": {
+            "match": "\\b(true|false)\\b",
+            "name": "constant.language.boolean.sophia"
+        },
+        "constant-bytes": {
+            "match": "(#[0-9A-Fa-f]+(_[0-9A-Fa-f]+)*)",
+            "name": "constant.numeric.bytes.sophia"
+        },
+        "constant-number": {
+            "patterns": [
+                {
+                    "include": "#number-decimal"
+                },
+                {
+                    "include": "#number-hexadecimal"
+                },
+                {
+                    "include": "#number-version"
+                }
+            ]
+        },
+        "number-decimal": {
+            "match": "\\b(\\d+(_\\d+)*)\\b",
+            "name": "constant.numeric.decimal.sophia"
+        },
+        "number-hexadecimal": {
+            "match": "\\b(0x[0-9A-Fa-f]+(_[0-9A-Fa-f])*)\\b",
+            "name": "constant.numeric.hexadecimal.sophia"
+        },
+        "number-version": {
+            "match": "\\b(\\d+(\\.\\d+){0,2})\\b",
+            "name": "constant.numeric.version.sophia"
+        },
+        "constant-address": {
+            "patterns": [
+                {
+                    "include": "#address-account"
+                },
+                {
+                    "include": "#address-contract"
+                },
+                {
+                    "include": "#address-oracle"
+                },
+                {
+                    "include": "#address-oracle-query"
+                }
+            ]
+        },
+        "address-account": {
+            "match": "\\b(ak_[1-9A-HJ-NP-Za-km-z]*)\\b",
+            "name": "constant.other.address.account.sophia"
+        },
+        "address-contract": {
+            "match": "\\b(ct_[1-9A-HJ-NP-Za-km-z]*)\\b",
+            "name": "constant.other.address.contract.sophia"
+        },
+        "address-oracle": {
+            "match": "\\b(ok_[1-9A-HJ-NP-Za-km-z]*)\\b",
+            "name": "constant.other.address.oracle.sophia"
+        },
+        "address-oracle-query": {
+            "match": "\\b(oq_[1-9A-HJ-NP-Za-km-z]*)\\b",
+            "name": "constant.other.address.oracle_query.sophia"
+        },
+        "string": {
+            "patterns": [
+                {
+                    "match": "\\\".*?\\\"",
+                    "name": "string.quoted.double.sophia"
+                },
+                {
+                    "match": "'.'",
+                    "name": "string.quoted.single.sophia"
+                }
+            ]
+        },
+        "type": {
+            "patterns": [
+                {
+                    "include": "#type-primitive"
+                }
+            ]
+        },
+        "type-primitive": {
+            "match": "\\b(int|address|bool|bits|bytes|string|list|option|unit|option|hash|signature|oracle|oracle_query|indexed)\\b",
+            "name": "support.type.primitive.sophia"
+        },
+        "global": {
+            "patterns": [
+                {
+                    "include": "#global-variables"
+                },
+                {
+                    "include": "#global-functions"
+                }
+            ]
+        },
+        "global-variables": {
+            "patterns": [
+                {
+                    "include": "#variable-underscore"
+                },
+                {
+                    "include": "#variable-hole"
+                },
+                {
+                    "include": "#variable-option"
+                }
+            ]
+        },
+        "variable-underscore": {
+            "match": "\\b(_)\\b",
+            "name": "variable.language.underscore.sophia"
+        },
+        "variable-hole": {
+            "match": "(\\?\\?\\?)",
+            "name": "variable.language.hole.sophia"
+        },
+        "variable-option": {
+            "match": "\\b(Some|None)\\b",
+            "name": "support.variable.option.sophia"
+        },
+        "global-functions": {
+            "patterns": [
+                {
+                    "match": "\\b(require|abort|exit)\\b",
+                    "name": "support.function.exceptions.sophia"
+                }
+            ]
+        },
+        "declaration": {
+            "patterns": [
+                {
+                    "include": "#declaration-contract"
+                },
+                {
+                    "include": "#declaration-namespace"
+                },
+                {
+                    "include": "#declaration-record"
+                },
+                {
+                    "include": "#declaration-function"
+                },
+                {
+                    "include": "#declaration-type"
+                }
+            ]
+        },
+        "declaration-contract": {
+            "patterns": [
+                {
+                    "match": "\\b(contract)(\\s+interface)?(\\s+([A-Z][A-Za-z0-9_']*))?\\b",
+                    "captures": {
+                        "1": {
+                            "name": "storage.type.contract.sophia"
+                        },
+                        "2": {
+                            "name": "storage.type.interface.sophia"
+                        },
+                        "4": {
+                            "name": "entity.name.type.contract.sophia"
+                        }
+                    }
+                },
+                {
+                    "match": "\\b(main)\\b",
+                    "name": "storage.modifier.sophia"
+                }
+            ]
+        },
+        "declaration-namespace": {
+            "match": "\\b(namespace)(\\s+([A-Z][A-Za-z0-9_']*))?\\b",
+            "captures": {
+                "1": {
+                    "name": "storage.type.namespace.sophia"
+                },
+                "3": {
+                    "name": "entity.name.type.namespace.sophia"
+                }
+            }
+        },
+        "declaration-record": {
+            "match": "\\b(record)(\\s+([A-Z][A-Za-z0-9_']*))?\\b",
+            "captures": {
+                "1": {
+                    "name": "storage.type.record.sophia"
+                },
+                "3": {
+                    "name": "entity.name.type.record.sophia"
+                }
+            }
+        },
+        "declaration-function": {
+            "patterns": [
+                {
+                    "match": "\\b(function|entrypoint)(\\s+[a-z_][A-Za-z0-9_']*)?\\b",
+                    "captures": {
+                        "1": {
+                            "name": "storage.type.function.sophia"
+                        },
+                        "2": {
+                            "name": "entity.name.function.sophia"
+                        }
+                    }
+                },
+                {
+                    "match": "\\b(private|public|stateful|payable)\\b",
+                    "name": "storage.modifier.sophia"
+                }
+            ]
+        },
+        "declaration-type": {
+            "match": "\\b(type|datatype)(\\s+[a-z_][A-Za-z0-9_']*)?\\b",
+            "captures": {
+                "1": {
+                    "name": "storage.type.type_decl.sophia"
+                },
+                "2": {
+                    "name": "entity.name.type.type_decl.sophia"
+                }
+            }
+        },
+        "function-call": {
+            "match": "\\b([a-z_][A-Za-z0-9_']*)\\s*\\(",
+            "captures": {
+                "1": {
+                    "name": "entity.name.function.sophia"
+                }
+            }
+        },
+        "qualification": {
+            "match": "\\b([A-Z][A-Za-z0-9_']*)\\.",
+            "captures": {
+                "1": {
+                    "name": "entity.name.namespace.sophia"
+                }
+            }
+        },
+        "punctuation": {
+            "patterns": [
+                {
+                    "match": "\\.",
+                    "name": "punctuation.accessor.sophia"
+                },
+                {
+                    "match": ",",
+                    "name": "punctuation.separator.sophia"
+                }
+            ]
+        }
+    },
+    "scopeName": "source.sophia",
+    "uuid": "ad87d2cd-8575-4afe-984e-9421a3788933"
+}

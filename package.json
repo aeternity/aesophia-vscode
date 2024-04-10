@@ -1,0 +1,36 @@
+{
+  "name": "aesophia-vscode",
+  "version": "0.0.1",
+  "publisher": "TODO",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "license": "SEE LICENSE IN LICENSE",
+  "displayName": "Aeternity Sophia",
+  "description": "Sophia Smart Contract Language Visual Studio Code Extension",
+  "categories": [
+    "Programming Languages"
+  ],
+  "icon": "icon.png",
+  "contributes": {
+    "languages": [{
+      "id": "sophia",
+      "extensions": [
+        ".aes"
+      ],
+      "aliases": [
+        "Sophia",
+        "sophia",
+        "aesophia"
+      ],
+      "configuration": "./sophia-language-configuration.json"
+    }],
+    "grammars": [
+      {
+        "language": "sophia",
+        "scopeName": "source.sophia",
+        "path": "./syntaxes/sophia.json"
+      }
+    ]
+  }
+}
