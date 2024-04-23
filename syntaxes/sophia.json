@@ -138,11 +138,11 @@
             "name": "keyword.control.flow.sophia"
         },
         "control-pragma": {
-            "match": "^(@compiler)",
+            "match": "(@compiler)",
             "name": "keyword.control.pragma.sophia"
         },
         "control-include": {
-            "match": "^(include)",
+            "match": "(include)",
             "name": "keyword.control.include.sophia"
         },
         "control-alias": {
@@ -170,7 +170,7 @@
             ]
         },
         "control-let": {
-            "match": "\\b(let)(\\s+[a-z_][A-Za-z0-9_']*)\\b",
+            "match": "\\b(let)(\\s+[a-z_][A-Za-z0-9_']*)?\\b",
             "captures": {
                 "1": {
                     "name": "keyword.control.let.sophia"
@@ -187,6 +187,9 @@
                 },
                 {
                     "include": "#constant-bytes"
+                },
+                {
+                    "include": "#constant-type-constructor"
                 },
                 {
                     "include": "#constant-number"
@@ -277,6 +280,10 @@
             "patterns": [
                 {
                     "include": "#type-primitive"
+                },
+                {
+                    "match": "('[a-z_][A-Za-z0-9_']*)",
+                    "name": "support.type.variable.sophia"
                 }
             ]
         },
@@ -365,6 +372,10 @@
                 {
                     "match": "\\b(main)\\b",
                     "name": "storage.modifier.sophia"
+                },
+                {
+                    "match": "\\b(interface)\\b",
+                    "name": "storage.type.interface.sophia"
                 }
             ]
         },
@@ -379,13 +390,24 @@
                 }
             }
         },
+        "declaration-type": {
+            "match": "\\b(type|datatype)(\\s+[a-z_][A-Za-z0-9_']*)?\\b",
+            "captures": {
+                "1": {
+                    "name": "storage.type.type_decl.sophia"
+                },
+                "2": {
+                    "name": "entity.name.type.type_decl.sophia"
+                }
+            }
+        },
         "declaration-record": {
-            "match": "\\b(record)(\\s+([A-Z][A-Za-z0-9_']*))?\\b",
+            "match": "\\b(record)(\\s+[a-z_][A-Za-z0-9_']*)?\\b",
             "captures": {
                 "1": {
                     "name": "storage.type.record.sophia"
                 },
-                "3": {
+                "2": {
                     "name": "entity.name.type.record.sophia"
                 }
             }
@@ -408,17 +430,6 @@
                     "name": "storage.modifier.sophia"
                 }
             ]
-        },
-        "declaration-type": {
-            "match": "\\b(type|datatype)(\\s+[a-z_][A-Za-z0-9_']*)?\\b",
-            "captures": {
-                "1": {
-                    "name": "storage.type.type_decl.sophia"
-                },
-                "2": {
-                    "name": "entity.name.type.type_decl.sophia"
-                }
-            }
         },
         "function-call": {
             "match": "\\b([a-z_][A-Za-z0-9_']*)\\s*\\(",
