@@ -33,6 +33,6 @@ From the extension directory:
 vsce package
 ```
 
-The above command will generate a file called `aesophia-vscode-{VERSION}.vsix`.
+The above command will generate a file called `aesophia-{VERSION}.vsix`.
 This file could be then be loaded in VSCode from
 (Extensions -> Install from VSIX).
