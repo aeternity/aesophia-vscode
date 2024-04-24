@@ -174,9 +174,6 @@
             "captures": {
                 "1": {
                     "name": "keyword.control.let.sophia"
-                },
-                "2": {
-                    "name": "variable.other.local.sophia"
                 }
             }
         },
@@ -430,14 +427,6 @@
                     "name": "storage.modifier.sophia"
                 }
             ]
-        },
-        "function-call": {
-            "match": "\\b([a-z_][A-Za-z0-9_']*)\\s*\\(",
-            "captures": {
-                "1": {
-                    "name": "entity.name.function.sophia"
-                }
-            }
         },
         "qualification": {
             "match": "\\b([A-Z][A-Za-z0-9_']*)\\.",
